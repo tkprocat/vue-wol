@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Edit device
+	</div>
+	<div class="panel-body">
+		<div id="alerts" v-if="messages.length > 0">
+			<div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
+				{{ message.message }}
+			</div>
+		</div>
+		<form class="form-horizontal" role="form" v-on:submit="updateDevice">
+			<div class="form-group">
+				<label for="name" class="col-sm-2 col-sm-offset-1 control-label">Name</label>
+				<div class="col-sm-5">
+					<input class="form-control" required="required" name="name" type="text" v-model="device.name" id="name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="mac" class="col-sm-2 col-sm-offset-1 control-label">MAC</label>
+				<div class="col-sm-5">
+					<input class="form-control" required="required" name="mac" type="text" v-model="device.mac">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="ip" class="col-sm-2 col-sm-offset-1 control-label">IP</label>
+				<div class="col-sm-5">
+					<input class="form-control" required="required" name="ip" type="text" v-model="device.ip">
+				</div>			
+			</div>	
+			<div class="form-group">
+				<div class="col-sm-4 col-sm-offset-3">
+					<button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Update</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

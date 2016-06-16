@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>Boot device</h1>
+    </div>
+
+    <div class="panel-body">
+        <form class="form-horizontal" role="form" v-on:submit="bootDevice" v-if="!$loadingRouteData">
+            <div class="form-group">
+                <label class="control-label col-md-2">Devices:</label>
+                <div class="col-md-8">
+                    <select name="bootDevice" class="form-control" v-model="selectedDevice">                
+                        <option v-for="device in devices" v-bind:value="device.mac">{{ device.name }} ({{ device.mac }} - {{ device.ip }})</option>
+    				</select>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-4">
+                <input type="submit" value="Boot" class="btn btn-primary">
+            </div>
+        </form>
+        <p v-if="$loadingRouteData">Loading data {{ loadingRouteData }}</p>
+    </div>
+    <div class="panel-footer">
+        <div id="alerts" v-show="messages.length > 0">
+            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
+                {{ message.message }}
+            </div>
+        </div>
+    </div>       
+</div>

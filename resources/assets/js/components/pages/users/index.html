@@ -1,0 +1,69 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Users
+	</div>
+	<div class="panel-body" v-if="$loadingRouteData">
+		Loading data {{ loadingRouteData }}
+	</div>
+	<div class="panel-body" v-if=" ! $loadingRouteData && users.length > 0">
+		<div id="alerts" v-if="messages.length > 0">
+			<div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
+				{{ message.message }}
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Username</th>
+					<th>Email</th>
+					<th width="120px">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="user in users">
+					<td>{{ user.username }}</td>
+					<td>{{ user.email }}</td>
+					<td>
+						<a class="btn btn-warning btn-xs" v-on:click="showUpdateUserModal(user)">Edit</a>
+						<a class="btn btn-danger btn-xs" v-on:click="deleteUser(user)">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>	
+<div tabindex="-1" role="dialog" id="updateUserModal" class="modal fade">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div type="button" data-dismiss="modal" aria-label="Close" class="button close"><span aria-hidden="true">&times;</span></div>
+				<h4 class="modal-title">Update user information</h4>
+			</div>
+			<div class="modal-body">
+				<form name="updateUser" role="form" v-on:submit="updateUser" class="form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-md-3">Username:</label>
+						<div class="col-md-7">
+							<input type="username" name="username" v-model="user.username" placeholder="Username" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Email:</label>
+						<div class="col-md-7">
+							<input type="email" name="email" v-model="user.email" placeholder="Email" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-8 col-md-offset-2 text-danger">
+						<ul>
+							<li v-for="error_message in error_messages" track-by="$index">{{ error_message }} </li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<div type="button" data-dismiss="modal" class="button btn btn-default">Close</div>
+				<div type="button" v-on:click="updateUser()" class="button btn btn-primary">Update</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,69 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<!-- Collapsed Hamburger -->
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle Navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<!-- Branding Image -->
+			<a class="navbar-brand" v-link="{ path: '/' }" style="padding-top: 19px;">
+				{{ navTitle }}
+			</a>
+		</div>		
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a v-link="{ path: '/home' }" v-if="$root.authenticated"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<i class="fa fa-user" aria-hidden="true"></i> Users<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a v-link="{ path: '/users' }">Users</a></li>
+						<li><a v-link="{ path: '/users/create' }">Add new</a></li>
+					</ul>
+				</li>							
+				<li class="dropdown" v-if="$root.authenticated">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<i class="fa fa-desktop" aria-hidden="true"></i> Devices<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a v-link="{ path: '/devices' }">Devices</a></li>
+						<li><a v-link="{ path: '/devices/create' }">Add new</a></li>
+					</ul>
+				</li>					
+			</ul>
+			<!-- Right Side Of Navbar -->
+			<ul class="nav navbar-nav navbar-right">
+				<!-- Login / Registration Links for unauthenticated users -->
+				<li v-if=" ! $root.authenticated"><a v-link="{ path: '/auth/login' }">Login</a></li>
+				<!-- Authenticated Right Dropdown -->
+				<li class="dropdown" v-if="$root.authenticated">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						{{ $root.user.username }} <span class="caret"></span>
+					</a>
+
+					<ul class="dropdown-menu" role="menu">
+						<!-- Settings -->
+						<li class="dropdown-header">Settings</li>
+						<li>
+							<a v-link="{ path: '/auth/profile' }">
+								<i class="fa fa-btn fa-fw fa-user"></i>Your profile
+							</a>
+						</li>
+
+						<!-- Logout -->
+						<li class="divider"></li>
+						<li>
+							<a v-link="{ path: '/auth/logout' }">
+								<i class="fa fa-btn fa-fw fa-sign-out"></i>Logout
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
