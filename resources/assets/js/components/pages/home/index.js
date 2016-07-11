@@ -26,7 +26,8 @@ module.exports = {
                 }
             )
         },
-        bootDevice: function(successHandler) {
+        bootDevice: function(e) {
+            e.preventDefault()
             var that = this
             var selected = this.devices.find(function(device) {
                 return device.mac === that.selectedDevice;
@@ -36,7 +37,7 @@ module.exports = {
                 entity: selected
             }).then(
                 function(response, status) {
-                    that.pingDevice(successHandler);
+                    that.pingDevice();
                     that.messages = [{
                         type: 'success',
                         message: 'Magic packet sent.'
@@ -53,7 +54,7 @@ module.exports = {
                 }
             )
         },
-        pingDevice: function(successHandler) {
+        pingDevice: function() {
             var that = this
             var selected = this.devices.find(function(device) {
                 return device.mac === that.selectedDevice;
