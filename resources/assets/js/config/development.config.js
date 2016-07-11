@@ -1,7 +1,7 @@
 var config = {
   env: 'development',
   api: {
-    base_url: 'http://laravel-wol.homestead.app:8000/api',
+    base_url: 'http://api.homestead.app:8000/api',
     defaultRequest: {
       headers: {
         'X-Requested-With': 'rest.js',
