@@ -72,12 +72,12 @@ module.exports = {
                     console.log(that.messages);
                     console.log('test');
                     if (response.entity.status === 'down') {
-                        setTimeout(that.pingDevice(successHandler), 3000);
+                        setTimeout(that.pingDevice(), 3000);
                     }
                 },
                 function(response, status) {
                     console.log('Something went wrong!');
-                },
+                }
             )
         },
     },
