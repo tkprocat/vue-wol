@@ -64,15 +64,19 @@ module.exports = {
                 entity: selected
             }).then(
                 function(response, status) {
-                    console.log(response.entity.message);
-                    that.messages.push({
-                        type: 'success',
-                        message: response.entity.message
-                    });
-                    console.log(that.messages);
-                    console.log('test');
+                    if (response.entity.message == 'No reply from device.') {
+                        that.messages.push({
+                            type: 'warning',
+                            message: response.entity.message
+                        });
+                    } else {
+                        that.messages.push({
+                            type: 'success',
+                            message: response.entity.message
+                        });
+                    }
                     if (response.entity.status === 'down') {
-                        setTimeout(that.pingDevice(), 3000);
+                            setTimeout(that.pingDevice(), 3000);
                     }
                 },
                 function(response, status) {
